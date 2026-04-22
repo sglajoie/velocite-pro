@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vélocité</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #f5f5f0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    main {
+      max-width: 680px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 10vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #f5f5f0;
+      margin-bottom: 2.5rem;
+    }
+
+    .tagline {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.75;
+      color: #c8c8c0;
+      margin-bottom: 3rem;
+      letter-spacing: 0.02em;
+    }
+
+    .notice {
+      font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #666660;
+      margin-bottom: 3rem;
+      line-height: 1.9;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background-color: #333330;
+      margin: 0 auto 3rem;
+    }
+
+    a.cta {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #f5f5f0;
+      text-decoration: none;
+      border-bottom: 1px solid #444440;
+      padding-bottom: 3px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    a.cta:hover {
+      color: #aaa;
+      border-color: #666660;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Vélocité</h1>
+    <p class="tagline">
+      Cesser de réagir au système —<br>
+      et devenir l'origine de sa dynamique relationnelle.<br>
+      Dans n'importe quelle relation.
+    </p>
+    <div class="divider"></div>
+    <p class="notice">
+      L'offre Vélocité est en construction.<br>
+      Places limitées &middot; Sur invitation &middot; Lancement bientôt.
+    </p>
+    <a class="cta" href="https://www.linkedin.com/in/stephanegerinlajoie/" target="_blank" rel="noopener noreferrer">
+      &rarr;&nbsp; Suivre Stéphane Gérin-Lajoie sur LinkedIn
+    </a>
+  </main>
+</body>
+</html>
