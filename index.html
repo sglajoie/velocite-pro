@@ -1,112 +1,121 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vélocité</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vélocité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
-      height: 100%;
-    }
+  body {
+    font-family: 'Jost', sans-serif;
+    background: #F2EFE9;
+    color: #2A2820;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+  }
 
-    body {
-      background-color: #faf8f3;
-      color: #1a1a18;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 2rem;
-    }
+  main {
+    max-width: 520px;
+    width: 100%;
+  }
 
-    main {
-      max-width: 680px;
-      width: 100%;
-      text-align: center;
-    }
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #9A9490;
+    margin-bottom: 14px;
+  }
 
-    h1 {
-      font-size: clamp(3rem, 10vw, 5.5rem);
-      font-weight: 300;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #1a1a18;
-      margin-bottom: 2.5rem;
-    }
+  h1 {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(3rem, 8vw, 4.2rem);
+    color: #2A2820;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 22px;
+  }
 
-    .tagline {
-      font-size: clamp(1.2rem, 2.5vw, 1.3rem);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.85;
-      color: #3a3a36;
-      margin-bottom: 3rem;
-      letter-spacing: 0.02em;
-    }
+  .rule {
+    width: 32px;
+    height: 1px;
+    background: #C4B89A;
+    margin-bottom: 22px;
+  }
 
-    .notice {
-      font-size: clamp(0.95rem, 1.8vw, 1rem);
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #7a7a72;
-      margin-bottom: 3rem;
-      line-height: 2;
-    }
+  .tagline {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.45rem, 4vw, 2rem);
+    color: #2A2820;
+    line-height: 1.35;
+    margin-bottom: 32px;
+  }
 
-    .divider {
-      width: 40px;
-      height: 1px;
-      background-color: #ccc9be;
-      margin: 0 auto 3rem;
-    }
+  .status {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #2A2820;
+    margin-bottom: 6px;
+  }
 
-    a.cta {
-      display: inline-block;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(1rem, 2vw, 1.05rem);
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #1a1a18;
-      text-decoration: none;
-      border-bottom: 1px solid #9a9a90;
-      padding-bottom: 3px;
-      transition: color 0.3s ease, border-color 0.3s ease;
-    }
+  .tags {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: #9A9490;
+    letter-spacing: 0.1em;
+    margin-bottom: 28px;
+  }
 
-    a.cta:hover {
-      color: #555550;
-      border-color: #555550;
-    }
-  </style>
+  a {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: #2A2820;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    letter-spacing: 0.06em;
+  }
+
+  a:hover { color: #6B6660; }
+</style>
 </head>
 <body>
-  <main>
-    <h1>Vélocité</h1>
-    <p class="tagline">
-      Cesser de réagir au système —<br>
-      et devenir l'origine de sa dynamique relationnelle.<br>
-      Dans n'importe quelle relation.
-    </p>
-    <div class="divider"></div>
-    <p class="notice">
-      L'offre Vélocité est en construction.<br>
-      Places limitées &middot; Sur invitation &middot; Lancement bientôt.
-    </p>
-    <a class="cta" href="https://www.linkedin.com/in/stephanegerinlajoie/" target="_blank" rel="noopener noreferrer">
-      &rarr;&nbsp; Suivre Stéphane Gérin-Lajoie sur LinkedIn
-    </a>
-  </main>
+<main>
+
+  <p class="eyebrow">Stéphane Gérin-Lajoie</p>
+
+  <h1>Vélocité</h1>
+
+  <div class="rule"></div>
+
+  <p class="tagline">
+    Cessez de réagir —<br>
+    et devenez l'origine de vos<br>
+    dynamiques relationnelles.
+  </p>
+
+  <p class="status">L'offre Vélocité est en construction.</p>
+  <p class="tags">Places limitées · Sur invitation · Lancement bientôt.</p>
+
+  <a href="https://www.linkedin.com/in/stephanegerinlajoie/" target="_blank" rel="noopener noreferrer">
+    → Suivre Stéphane Gérin-Lajoie sur LinkedIn
+  </a>
+
+</main>
 </body>
 </html>
