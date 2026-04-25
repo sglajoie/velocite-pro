@@ -10,112 +10,360 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'Jost', sans-serif;
-    background: #F2EFE9;
-    color: #2A2820;
-    min-height: 100vh;
+  blockquote { quotes: none; }
+
+  /* ================================================
+     S1 — HERO  #0C0A08
+  ================================================ */
+  .s1 {
+    background: #0C0A08;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem 1.5rem;
+    padding: 5rem 2rem;
+    text-align: center;
   }
 
-  main {
-    max-width: 520px;
-    width: 100%;
-  }
+  .s1-inner { max-width: 560px; width: 100%; }
 
-  .eyebrow {
+  .eyebrow-hero {
     font-family: 'Jost', sans-serif;
-    font-size: 12px;
+    font-style: normal;
+    font-size: 9px;
     font-weight: 400;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: #9A9490;
-    margin-bottom: 14px;
+    color: #907060;
+    line-height: 1.5;
+    margin-bottom: 2.4rem;
   }
 
-  h1 {
+  .s1 h1 {
     font-family: 'Cormorant', serif;
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(4rem, 8vw, 6rem);
-    color: #2A2820;
-    letter-spacing: 0.04em;
+    font-size: clamp(3.6rem, 9vw, 5.2rem);
+    color: #F0E6DC;
+    letter-spacing: 0.02em;
     line-height: 1;
-    margin-bottom: 22px;
+    margin-bottom: 1.4rem;
   }
 
-  .rule {
-    width: 32px;
+  .rule-hero {
+    width: 36px;
     height: 1px;
-    background: #C4B89A;
-    margin-bottom: 22px;
+    background: #581828;
+    opacity: 0.8;
+    margin: 0 auto 2rem;
   }
 
-  .tagline {
+  .accroche {
     font-family: 'Cormorant', serif;
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(1.95rem, 4vw, 2.5rem);
-    color: #2A2820;
-    line-height: 1.35;
-    margin-bottom: 32px;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    color: #C8B8A0;
+    line-height: 1.5;
+    margin-bottom: 1.8rem;
   }
 
-  .status {
+  .sous-titre {
     font-family: 'Jost', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #2A2820;
-    margin-bottom: 6px;
-  }
-
-  .tags {
-    font-family: 'Jost', sans-serif;
+    font-style: normal;
     font-size: 13px;
     font-weight: 300;
-    color: #9A9490;
-    letter-spacing: 0.1em;
-    margin-bottom: 28px;
+    color: #484038;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
   }
 
-  a {
+  /* ================================================
+     S2 — STATUT  #F5EDE0 Cannoli
+  ================================================ */
+  .s2 {
+    background: #F5EDE0;
+    padding: 6rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .s2-inner { max-width: 560px; width: 100%; }
+
+  .eyebrow-s2 {
     font-family: 'Jost', sans-serif;
-    font-size: 14px;
+    font-style: normal;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #B09070;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+
+  .statut-text {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+    color: #0C0A08;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+
+  .pills {
+    display: flex;
+    gap: 0.7rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 9px;
     font-weight: 400;
-    color: #2A2820;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 0.5px solid #7BAAC8;
+    color: #7BAAC8;
+    background: transparent;
+    transition: border-color 0.2s, color 0.2s;
+    cursor: default;
+  }
+
+  /* ================================================
+     S3 — CITATION  #A07060 Mocha
+  ================================================ */
+  .s3 {
+    background: #A07060;
+    padding: 6rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .s3-inner { max-width: 560px; width: 100%; }
+
+  .eyebrow-s3 {
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #E8C8A8;
+    opacity: 0.6;
+    line-height: 1.5;
+    margin-bottom: 1.4rem;
+  }
+
+  .rule-section {
+    width: 32px;
+    height: 1px;
+    background: #080604;
+    opacity: 0.4;
+    margin: 0 auto 2rem;
+  }
+
+  .quote {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: #F5EDE0;
+    line-height: 1.5;
+    margin-bottom: 1.8rem;
+  }
+
+  .attribution {
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 300;
+    color: #E8C8A8;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+  }
+
+  /* ================================================
+     S4 — CTA  #C09080 Sirocco
+  ================================================ */
+  .s4 {
+    background: #C09080;
+    padding: 6rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .s4-inner { max-width: 560px; width: 100%; }
+
+  .eyebrow-s4 {
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #F5EDE0;
+    opacity: 0.5;
+    line-height: 1.5;
+    margin-bottom: 1.4rem;
+  }
+
+  .s4-titre {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: #F5EDE0;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 13px 28px;
+    background: #581828;
+    color: #F5EDE0;
+    border: none;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    line-height: 1.5;
+  }
+
+  .btn-primary:hover { opacity: 0.88; }
+
+  /* ================================================
+     S5 — FOOTER  #080604
+  ================================================ */
+  .s5 {
+    background: #080604;
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .s5-inner { max-width: 560px; width: 100%; }
+
+  .footer-wordmark {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.8rem;
+    color: #F0E6DC;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-signature {
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 8px;
+    font-weight: 200;
+    color: #605040;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    margin-bottom: 1.8rem;
+  }
+
+  .footer-link {
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 400;
+    color: #7BAAC8;
     text-decoration: underline;
     text-underline-offset: 3px;
     letter-spacing: 0.06em;
+    transition: color 0.2s;
+    line-height: 1.5;
   }
 
-  a:hover { color: #6B6660; }
+  .footer-link:hover { color: #581828; }
 </style>
 </head>
 <body>
-<main>
 
-  <p class="eyebrow">Stéphane Gérin-Lajoie</p>
+<!-- S1 — Hero -->
+<section class="s1">
+  <div class="s1-inner">
+    <p class="eyebrow-hero">Stéphane Gérin-Lajoie</p>
+    <h1>Vélocité</h1>
+    <div class="rule-hero"></div>
+    <p class="accroche">
+      Cessez de réagir —<br>
+      et devenez l'origine de vos<br>
+      dynamiques relationnelles.
+    </p>
+    <p class="sous-titre">Conseil privé</p>
+  </div>
+</section>
 
-  <h1>Vélocité</h1>
+<!-- S2 — Statut -->
+<section class="s2">
+  <div class="s2-inner">
+    <p class="eyebrow-s2">Disponibilité</p>
+    <p class="statut-text">L'offre Vélocité est en construction.</p>
+    <div class="pills">
+      <span class="pill">Places limitées</span>
+      <span class="pill">Sur invitation</span>
+      <span class="pill">Lancement bientôt</span>
+    </div>
+  </div>
+</section>
 
-  <div class="rule"></div>
+<!-- S3 — Citation -->
+<section class="s3">
+  <div class="s3-inner">
+    <p class="eyebrow-s3">Philosophie</p>
+    <div class="rule-section"></div>
+    <blockquote class="quote">
+      Moins il y a d'éléments,<br>
+      plus chacun compte.
+    </blockquote>
+    <p class="attribution">Vélocité</p>
+  </div>
+</section>
 
-  <p class="tagline">
-    Cessez de réagir —<br>
-    et devenez l'origine de vos<br>
-    dynamiques relationnelles.
-  </p>
+<!-- S4 — CTA -->
+<section class="s4">
+  <div class="s4-inner">
+    <p class="eyebrow-s4">Rejoindre</p>
+    <p class="s4-titre">Suivre l'avancement de Vélocité.</p>
+    <a class="btn-primary" href="https://www.linkedin.com/in/stephanegerinlajoie/" target="_blank" rel="noopener noreferrer">
+      Suivre sur LinkedIn
+    </a>
+  </div>
+</section>
 
-  <p class="status">L'offre Vélocité est en construction.</p>
-  <p class="tags">Places limitées · Sur invitation · Lancement bientôt.</p>
+<!-- S5 — Footer -->
+<section class="s5">
+  <div class="s5-inner">
+    <p class="footer-wordmark">Vélocité</p>
+    <p class="footer-signature">Stéphane Gérin-Lajoie</p>
+    <a class="footer-link" href="https://www.linkedin.com/in/stephanegerinlajoie/" target="_blank" rel="noopener noreferrer">
+      LinkedIn
+    </a>
+  </div>
+</section>
 
-  <a href="https://www.linkedin.com/in/stephanegerinlajoie/" target="_blank" rel="noopener noreferrer">
-    → Suivre Stéphane Gérin-Lajoie sur LinkedIn
-  </a>
-
-</main>
 </body>
 </html>
