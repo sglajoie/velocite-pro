@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vélocité — Votre place est réservée</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ivoire: #F2EFE9; --encre: #131210; --charbon: #2A2820; --ardoise: #6B6660;
+  --cannoli: #F5EDE0; --bordeaux: #581828; --cuivre: #B89878;
+  --rule-dark: rgba(245,237,224,0.1); --rule-light: rgba(42,40,32,0.1);
+  --serif: 'Cormorant', Georgia, serif; --sans: 'Jost', system-ui, sans-serif;
+}
+html { min-height: 100vh; }
+body { background: var(--encre); color: var(--cannoli); font-family: var(--sans); font-weight: 400; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(19,18,16,0.94); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--rule-dark); display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 56px; }
+.nav-logo { font-family: var(--serif); font-style: italic; font-size: 14px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cannoli); text-decoration: none; }
+
+/* PAGE */
+.conf-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 48px 96px;
+  min-height: 100vh;
+}
+.conf-inner { max-width: 580px; width: 100%; }
+
+/* EYEBROW */
+.conf-eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--cuivre); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.conf-eyebrow::before { content: ''; display: block; width: 24px; height: 0.5px; background: var(--cuivre); opacity: 0.6; }
+
+/* TITRE */
+.conf-h1 {
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(3rem, 7vw, 5rem); color: var(--cannoli);
+  line-height: 1.05; margin-bottom: 36px;
+}
+.conf-h1 em { color: var(--cuivre); }
+
+/* CORPS */
+.conf-body {
+  font-size: 18px; font-weight: 400; line-height: 1.85;
+  color: rgba(245,237,224,0.72); margin-bottom: 40px;
+}
+.conf-body p + p { margin-top: 16px; }
+.conf-body strong { font-weight: 500; color: var(--cannoli); }
+
+/* ENCART */
+.conf-encart {
+  padding: 28px 32px;
+  border: 0.5px solid rgba(245,237,224,0.1);
+  border-left: 2px solid var(--cuivre);
+  background: rgba(245,237,224,0.04);
+  margin-bottom: 48px;
+}
+.conf-encart-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--cuivre); margin-bottom: 12px;
+}
+.conf-encart-text {
+  font-family: var(--serif); font-style: italic;
+  font-size: 18px; color: var(--cannoli); line-height: 1.6;
+}
+
+/* CONTACT */
+.conf-contact-label {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(245,237,224,0.4); margin-bottom: 16px;
+}
+.conf-contact-links { display: flex; flex-direction: column; gap: 0; }
+.conf-contact-link {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 16px; font-weight: 300; color: rgba(245,237,224,0.62);
+  text-decoration: none; transition: color 0.2s;
+  padding: 14px 0; border-bottom: 0.5px solid rgba(245,237,224,0.08);
+}
+.conf-contact-link:last-child { border-bottom: none; }
+.conf-contact-link:hover { color: var(--cannoli); }
+.conf-contact-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; opacity: 0.7; }
+
+
+
+/* FOOTER */
+footer { background: var(--encre); border-top: 0.5px solid var(--rule-dark); padding: 52px 48px; }
+.footer-inner { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; align-items: start; }
+.footer-brand { display: flex; flex-direction: column; gap: 6px; }
+.footer-name { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,237,224,0.75); }
+.footer-tagline { font-size: 11px; font-weight: 300; color: rgba(245,237,224,0.42); }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 12px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,237,224,0.55); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--cannoli); }
+.footer-contact { display: flex; flex-direction: column; gap: 10px; }
+.footer-contact a { font-size: 13px; font-weight: 300; color: rgba(245,237,224,0.55); text-decoration: none; transition: color 0.2s; }
+.footer-contact a:hover { color: var(--cannoli); }
+@media (max-width: 900px) {
+  footer { padding: 40px 24px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; text-align: left; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Stéphane Gérin-Lajoie</a>
+</nav>
+
+<div class="conf-page">
+  <div class="conf-inner">
+    <div class="conf-eyebrow">Séance de clarté confirmée</div>
+    <h1 class="conf-h1">Votre place<br>est <em>réservée.</em></h1>
+    <div class="conf-body">
+      <p>Stéphane a reçu vos réponses et arrive préparé. Vous recevrez sous quelques minutes un courriel de confirmation avec le lien pour votre séance.</p>
+      <p><strong>Vérifiez vos courriels</strong> — y compris vos indésirables. Si vous ne recevez rien dans les 15 minutes, contactez Stéphane directement.</p>
+    </div>
+    <div class="conf-encart">
+      <div class="conf-encart-label">À venir dans votre boîte</div>
+      <p class="conf-encart-text">Un courriel de confirmation · Le lien de votre séance · Les détails pratiques</p>
+    </div>
+    <div class="conf-contact-label">Joindre Stéphane directement</div>
+    <div class="conf-contact-links">
+      <a href="mailto:stephane@velocite.pro" class="conf-contact-link">
+        <span class="conf-contact-icon">✉</span>
+        stephane@velocite.pro
+      </a>
+      <a href="https://wa.me/15146039511" target="_blank" class="conf-contact-link">
+        <span class="conf-contact-icon">💬</span>
+        WhatsApp — +1 514 603-9511
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-name">Vélocité · Stéphane Gérin-Lajoie</span>
+      <span class="footer-tagline">Conseiller privé · Relations interpersonnelles · En visioconférence</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Accueil</a>
+      <a href="/couple">Couple</a>
+      <a href="/affaires">En affaires</a>
+      <a href="/modele">Le modèle</a>
+      <a href="/seance-de-clarte">Séance de clarté</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:stephane@velocite.pro">stephane@velocite.pro</a>
+      <a href="https://wa.me/15146039511" target="_blank">WhatsApp</a>
+      <a href="https://linkedin.com/in/stephanegerinlajoie" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

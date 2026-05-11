@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vélocité — Séance de clarté · Stéphane Gérin-Lajoie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ivoire: #F2EFE9; --encre: #131210; --charbon: #2A2820;
+  --cannoli: #F5EDE0; --bordeaux: #581828; --cuivre: #B89878;
+  --ardoise: #6B6660; --rule-dark: rgba(245,237,224,0.1); --rule-light: rgba(42,40,32,0.1);
+  --serif: 'Cormorant', Georgia, serif; --sans: 'Jost', system-ui, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--ivoire); color: var(--charbon); font-family: var(--sans); font-weight: 400; -webkit-font-smoothing: antialiased; overflow-x: hidden; min-height: 100vh; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(19,18,16,0.96); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--rule-dark); display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 56px; }
+.nav-logo { font-family: var(--serif); font-style: italic; font-size: 14px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cannoli); text-decoration: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,237,224,0.55); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--cannoli); }
+.nav-cta { background: var(--bordeaux); color: var(--cannoli); font-family: var(--sans); font-size: 12px; font-weight: 500; padding: 14px 28px; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; transition: opacity 0.2s; }
+.nav-cta:hover { opacity: 0.85; }
+.nav-position { font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cannoli); background: var(--bordeaux); padding: 14px 28px; opacity: 1; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; color: var(--cannoli); }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: currentColor; transition: all 0.3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.nav-menu-mobile { display: none; position: fixed; top: 56px; left: 0; right: 0; background: var(--encre); border-bottom: 0.5px solid var(--rule-dark); padding: 32px 24px 40px; z-index: 99; flex-direction: column; }
+.nav-menu-mobile.open { display: flex; }
+.nav-menu-mobile a { font-size: 18px; font-weight: 400; letter-spacing: 0.08em; color: rgba(245,237,224,0.75); text-decoration: none; padding: 16px 0; border-bottom: 0.5px solid var(--rule-dark); font-family: var(--serif); font-style: italic; }
+.nav-menu-sep { height: 0.5px; background: var(--rule-dark); margin: 8px 0; }
+.nav-menu-contact { font-size: 13px !important; font-weight: 300 !important; color: rgba(245,237,224,0.4) !important; font-style: normal !important; font-family: var(--sans) !important; }
+
+/* PAGE PRINCIPALE */
+.page-wrap { padding-top: 56px; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* EN-TÊTE */
+.page-header { padding: 64px 48px 48px; border-bottom: 0.5px solid var(--rule-light); background: var(--ivoire); }
+.header-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bordeaux); margin-bottom: 16px; }
+.header-title { font-family: var(--serif); font-style: italic; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 400; color: var(--charbon); line-height: 1.15; margin-bottom: 12px; }
+.header-title em { color: var(--bordeaux); }
+.header-sub { font-size: 17px; font-weight: 400; color: rgba(42,40,32,0.65); line-height: 1.7; max-width: 480px; }
+
+/* LAYOUT PRINCIPAL */
+.main-layout { display: grid; grid-template-columns: 1fr 380px; flex: 1; background: var(--ivoire); }
+
+/* COLONNE GAUCHE — DIALOGUE */
+.dialogue-col { padding: 48px; border-right: 0.5px solid var(--rule-light); }
+
+/* HISTORIQUE DES RÉPONSES */
+.historique { display: flex; flex-direction: column; gap: 32px; margin-bottom: 48px; }
+.reponse-item { opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reponse-item.visible { opacity: 1; transform: translateY(0); }
+.reponse-question { font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(42,40,32,0.35); margin-bottom: 6px; }
+.reponse-valeur { font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem, 2vw, 1.5rem); color: rgba(42,40,32,0.55); line-height: 1.4; }
+.reponse-valeur em { color: var(--bordeaux); font-style: italic; }
+
+/* QUESTION ACTIVE */
+.question-active { }
+.question-numero { font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(42,40,32,0.45); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+.question-numero::after { content: ''; flex: 1; height: 0.5px; background: rgba(42,40,32,0.15); }
+.question-texte { font-family: var(--serif); font-style: italic; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--charbon); line-height: 1.25; margin-bottom: 32px; }
+.question-texte em { color: var(--cuivre); }
+
+/* OPTIONS */
+.options-liste { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.option-btn { background: rgba(42,40,32,0.03); border: 0.5px solid rgba(42,40,32,0.15); padding: 20px 28px; text-align: left; cursor: pointer; font-family: var(--sans); font-size: 18px; font-weight: 400; color: rgba(42,40,32,0.85); transition: all 0.2s; display: flex; align-items: center; gap: 16px; }
+.option-btn:hover { background: rgba(42,40,32,0.07); border-color: rgba(42,40,32,0.3); color: var(--charbon); }
+.option-btn.selected { background: rgba(88,24,40,0.06); border-color: var(--bordeaux); color: var(--charbon); }
+.option-indicator { width: 6px; height: 6px; border-radius: 50%; border: 1px solid rgba(42,40,32,0.25); flex-shrink: 0; transition: all 0.2s; }
+.option-btn.selected .option-indicator { background: var(--bordeaux); border-color: var(--bordeaux); }
+
+/* CHAMP LIBRE */
+.champ-libre { width: 100%; background: rgba(42,40,32,0.03); border: 0.5px solid rgba(42,40,32,0.12); padding: 20px 24px; color: var(--charbon); font-family: var(--sans); font-size: 16px; font-weight: 300; line-height: 1.7; resize: none; outline: none; min-height: 120px; transition: border-color 0.2s; }
+.champ-libre::placeholder { color: rgba(42,40,32,0.3); }
+.champ-libre:focus { border-color: rgba(42,40,32,0.4); }
+
+/* BOUTON SUIVANT */
+.btn-suivant { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 12px; font-family: var(--sans); font-size: 14px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bordeaux); padding: 0; margin-top: 24px; transition: gap 0.2s; opacity: 0; pointer-events: none; transition: opacity 0.3s, gap 0.2s; }
+.btn-suivant.actif { opacity: 1; pointer-events: auto; }
+.btn-suivant:hover { gap: 18px; }
+.btn-suivant-arrow { font-size: 18px; }
+
+/* BARRE DE PROGRESSION */
+.progression { display: flex; gap: 6px; margin-bottom: 40px; }
+.prog-dot { height: 2px; flex: 1; background: rgba(42,40,32,0.12); transition: background 0.4s; }
+.prog-dot.active { background: var(--bordeaux); }
+.prog-dot.done { background: rgba(184,152,120,0.5); }
+
+/* COLONNE DROITE — RÉCAPITULATIF + PAIEMENT */
+.recap-col { padding: 48px 40px; display: flex; flex-direction: column; background: rgba(42,40,32,0.03); border-left: 0.5px solid var(--rule-light); }
+.recap-sticky { position: sticky; top: 80px; }
+
+.recap-label { font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(42,40,32,0.6); margin-bottom: 24px; }
+
+/* CARTE SÉANCE */
+.carte-seance { border: 0.5px solid rgba(42,40,32,0.15); padding: 32px; margin-bottom: 24px; background: white; }
+.carte-nom { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--charbon); margin-bottom: 6px; }
+.carte-detail { font-size: 13px; font-weight: 400; color: rgba(42,40,32,0.6); letter-spacing: 0.06em; margin-bottom: 24px; }
+.carte-prix { font-family: var(--serif); font-style: italic; font-size: 48px; color: var(--charbon); line-height: 1; margin-bottom: 4px; }
+.carte-prix-note { font-size: 13px; font-weight: 400; color: rgba(42,40,32,0.5); }
+.carte-sep { height: 0.5px; background: rgba(42,40,32,0.08); margin: 20px 0; }
+.carte-inclus-label { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(42,40,32,0.6); margin-bottom: 14px; }
+.carte-ligne { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 0.5px solid rgba(42,40,32,0.06); }
+.carte-ligne:last-child { border-bottom: none; }
+.carte-ligne-texte { font-size: 15px; font-weight: 400; color: rgba(42,40,32,0.8); line-height: 1.55; flex: 1; padding-right: 12px; }
+.carte-ligne-duree { font-size: 13px; font-weight: 500; color: var(--cuivre); white-space: nowrap; }
+
+/* SECTION PAIEMENT — cachée jusqu'à la fin */
+.section-paiement { display: none; flex-direction: column; gap: 16px; }
+.section-paiement.visible { display: flex; }
+
+.champ-label { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(42,40,32,0.7); margin-bottom: 8px; }
+.champ-input { width: 100%; background: white; border: 0.5px solid rgba(42,40,32,0.15); padding: 16px 20px; color: var(--charbon); font-family: var(--sans); font-size: 15px; font-weight: 300; outline: none; transition: border-color 0.2s; }
+.champ-input::placeholder { color: rgba(42,40,32,0.3); }
+.champ-input:focus { border-color: rgba(42,40,32,0.4); }
+
+.btn-reserver { width: 100%; background: var(--bordeaux); color: var(--cannoli); border: none; padding: 22px 24px; font-family: var(--sans); font-size: 15px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; margin-top: 12px; }
+.btn-reserver:hover { opacity: 0.88; }
+
+.recap-note { font-size: 12px; font-weight: 400; color: rgba(42,40,32,0.55); line-height: 1.7; text-align: center; margin-top: 16px; }
+.recap-confiance { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; padding-top: 20px; border-top: 0.5px solid rgba(42,40,32,0.08); }
+.confiance-ligne { font-size: 13px; font-weight: 400; color: rgba(42,40,32,0.65); display: flex; align-items: center; gap: 8px; }
+.confiance-ligne::before { content: '—'; color: var(--cuivre); font-size: 10px; }
+
+/* ÉCRAN FINAL — invitation sobre */
+.ecran-final { display: none; flex-direction: column; }
+.ecran-final.visible { display: flex; }
+.final-kicker { font-size: 11px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--bordeaux); margin-bottom: 20px; }
+.final-titre { font-family: var(--serif); font-style: italic; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--charbon); line-height: 1.2; margin-bottom: 16px; }
+.final-titre em { color: var(--cuivre); }
+.final-corps { font-size: 16px; font-weight: 300; color: rgba(42,40,32,0.65); line-height: 1.8; margin-bottom: 32px; max-width: 520px; }
+
+
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none !important; }
+  .nav-hamburger { display: flex; }
+  .page-header { padding: 48px 24px 36px; }
+  .main-layout { grid-template-columns: 1fr; }
+  .dialogue-col { padding: 36px 24px; border-right: none; border-bottom: 0.5px solid var(--rule-dark); }
+  .recap-col { padding: 36px 24px; }
+  .recap-sticky { position: relative; top: auto; }
+  }
+
+
+
+
+
+
+/* FOOTER */
+footer { background: var(--encre); border-top: 0.5px solid var(--rule-dark); padding: 52px 48px; }
+.footer-inner { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; align-items: start; }
+.footer-brand { display: flex; flex-direction: column; gap: 6px; }
+.footer-name { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,237,224,0.75); }
+.footer-tagline { font-size: 11px; font-weight: 300; color: rgba(245,237,224,0.42); }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 12px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,237,224,0.55); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--cannoli); }
+.footer-contact { display: flex; flex-direction: column; gap: 10px; }
+.footer-contact a { font-size: 13px; font-weight: 300; color: rgba(245,237,224,0.55); text-decoration: none; transition: color 0.2s; }
+.footer-contact a:hover { color: var(--cannoli); }
+@media (max-width: 900px) {
+  footer { padding: 40px 24px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; text-align: left; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Stéphane Gérin-Lajoie</a>
+  <ul class="nav-links">
+    <li><a href="/couple">Couple</a></li>
+    <li><a href="/affaires">En affaires</a></li>
+    <li><a href="/modele">Le modèle</a></li>
+  </ul>
+  <span class="nav-position">Première séance</span>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-menu-mobile" id="nav-menu-mobile">
+    <a href="/couple">Dans le couple</a>
+    <a href="/affaires">En affaires</a>
+    <a href="/modele">Le modèle</a>
+    <a href="/seance-de-clarte">Séance de clarté →</a>
+    <div class="nav-menu-sep"></div>
+    <a href="mailto:stephane@velocite.pro" class="nav-menu-contact">stephane@velocite.pro</a>
+    <a href="https://wa.me/15146039511" target="_blank" class="nav-menu-contact">WhatsApp</a>
+    <a href="https://linkedin.com/in/stephanegerinlajoie" target="_blank" class="nav-menu-contact">LinkedIn</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="header-eyebrow">Séance de clarté · Première étape</div>
+    <h1 class="header-title">Quelques questions<br><em>pour bien vous recevoir.</em></h1>
+    <p class="header-sub">Trois questions. Ce que vous partagez ici aide Stéphane à être pleinement présent pour vous dès la première minute.</p>
+  </div>
+
+  <div class="main-layout">
+
+    <!-- COLONNE GAUCHE — DIALOGUE -->
+    <div class="dialogue-col">
+
+      <!-- Barre de progression -->
+      <div class="progression" id="progression">
+        <div class="prog-dot active" id="dot-0"></div>
+        <div class="prog-dot" id="dot-1"></div>
+        <div class="prog-dot" id="dot-2"></div>
+        <div class="prog-dot" id="dot-3"></div>
+        <div class="prog-dot" id="dot-4"></div>
+      </div>
+
+      <!-- Historique des réponses -->
+      <div class="historique" id="historique"></div>
+
+      <!-- Conteneur des questions -->
+      <div id="question-container"></div>
+
+      <!-- Écran final -->
+      <div class="ecran-final" id="ecran-final">
+        <div class="final-kicker">Vous êtes prête.</div>
+        <h2 class="final-titre">Une dernière chose —<br><em>réservez votre place.</em></h2>
+        <p class="final-corps">Stéphane a lu ce que vous avez partagé. La séance de clarté est le premier vrai moment ensemble — 70 minutes pour voir ce qui se joue vraiment et ce qui est possible depuis là où vous en êtes.</p>
+      </div>
+
+    </div>
+
+    <!-- COLONNE DROITE — RÉCAPITULATIF + PAIEMENT -->
+    <div class="recap-col">
+      <div class="recap-sticky">
+        <div class="recap-label">Votre séance</div>
+
+        <div class="carte-seance">
+          <div class="carte-nom">Séance de clarté</div>
+          <div class="carte-detail">Avec Stéphane Gérin-Lajoie · En visioconférence</div>
+          <div class="carte-prix">127 €</div>
+          <div class="carte-prix-note">Une seule fois</div>
+          <div class="carte-sep"></div>
+          <div class="carte-inclus-label">Ce que comprend la séance</div>
+          <div class="carte-ligne">
+            <div class="carte-ligne-texte">Séance de clarté personnelle et relationnelle — la dynamique exacte, ce qui la nourrit, ce qui est possible</div>
+            <div class="carte-ligne-duree">55 min</div>
+          </div>
+          <div class="carte-ligne">
+            <div class="carte-ligne-texte">Discussion sur les formats d'accompagnement disponibles</div>
+            <div class="carte-ligne-duree">15 min</div>
+          </div>
+        </div>
+
+        <!-- Section paiement — apparaît à la fin du questionnaire -->
+        <div class="section-paiement" id="section-paiement">
+          <div>
+            <div class="champ-label">Votre prénom</div>
+            <input type="text" class="champ-input" id="champ-prenom" placeholder="Prénom">
+          </div>
+          <div>
+            <div class="champ-label">Votre adresse email</div>
+            <input type="email" class="champ-input" id="champ-email" placeholder="votre@adresse.com">
+          </div>
+          <button class="btn-reserver" onclick="reserverSeance()">
+            Commencer · 127 € →
+          </button>
+          <p class="recap-note">Accès au calendrier de Stéphane après paiement.</p>
+        </div>
+
+        <div class="recap-confiance">
+          <div class="confiance-ligne">Ce que vous partagez reste entre vous et Stéphane</div>
+          <div class="confiance-ligne">Séance non remboursable · Modification de date possible</div>
+          <div class="confiance-ligne">Places limitées</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-name">Vélocité · Stéphane Gérin-Lajoie</span>
+      <span class="footer-tagline">Conseiller privé · Relations interpersonnelles · En visioconférence</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Accueil</a>
+      <a href="/couple">Couple</a>
+      <a href="/affaires">En affaires</a>
+      <a href="/modele">Le modèle</a>
+      <a href="/seance-de-clarte">Séance de clarté</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:stephane@velocite.pro">stephane@velocite.pro</a>
+      <a href="https://wa.me/15146039511" target="_blank">WhatsApp</a>
+      <a href="https://linkedin.com/in/stephanegerinlajoie" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    id: 'situation',
+    numero: 'Question 1 sur 4',
+    texte: 'Dans quelle relation\n<em>ça coince le plus en ce moment ?</em>',
+    type: 'choix',
+    options: [
+      'Dans mon couple ou ma vie intime',
+      'Dans mon milieu professionnel',
+      'Les deux — et c\'est épuisant'
+    ]
+  },
+  {
+    id: 'manifestation',
+    numero: 'Question 2 sur 4',
+    texte: 'Comment est-ce que\n<em>ça se manifeste ?</em>',
+    type: 'choix',
+    options: [
+      'Les mêmes conversations reviennent — sans jamais se résoudre',
+      'Je perds mes moyens avec cette personne précise',
+      'Je porte trop — et je le porte seul',
+      'Je ne comprends pas pourquoi ça coince là'
+    ]
+  },
+  {
+    id: 'duree',
+    numero: 'Question 3 sur 4',
+    texte: 'Depuis combien de temps\n<em>cette dynamique est-elle là ?</em>',
+    type: 'choix',
+    options: [
+      'Quelques semaines',
+      'Plusieurs mois',
+      'Plus d\'un an',
+      'Depuis toujours, ou presque'
+    ]
+  },
+  {
+    id: 'enjeu',
+    numero: 'Question 4 sur 4',
+    texte: 'Si cette situation\n<em>ne se résout pas —</em>\nqu\'est-ce qui est en jeu pour vous ?',
+    type: 'choix',
+    options: [
+      'Peu — c\'est inconfortable mais gérable',
+      'Beaucoup — ça pèse sur tout le reste',
+      'Énormément — c\'est au cœur de tout ce que je veux changer'
+    ]
+  }
+];
+
+let etapeCourante = 0;
+let reponses = {};
+
+function renderQuestion(index) {
+  const q = QUESTIONS[index];
+  const container = document.getElementById('question-container');
+
+  // Mettre à jour la progression
+  document.querySelectorAll('.prog-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'done');
+    if (i < index) dot.classList.add('done');
+    else if (i === index) dot.classList.add('active');
+  });
+
+  if (index >= QUESTIONS.length) {
+    container.innerHTML = '';
+    document.getElementById('ecran-final').classList.add('visible');
+    document.getElementById('section-paiement').classList.add('visible');
+    // Toutes les dots done
+    document.querySelectorAll('.prog-dot').forEach(d => d.classList.add('done'));
+    return;
+  }
+
+  let html = `
+    <div class="question-active" id="question-active">
+      <div class="question-numero">${q.numero}</div>
+      <div class="question-texte">${q.texte.replace(/\n/g, '<br>')}</div>
+  `;
+
+  if (q.type === 'choix') {
+    html += `<div class="options-liste">`;
+    q.options.forEach((opt, i) => {
+      html += `
+        <button class="option-btn" onclick="selectionnerOption(${i}, this)">
+          <span class="option-indicator"></span>
+          ${opt}
+        </button>
+      `;
+    });
+    html += `</div>`;
+  } else {
+    html += `
+      <textarea class="champ-libre" id="champ-libre-actif"
+        placeholder="${q.placeholder}"
+        oninput="verifierChampLibre(this)"></textarea>
+    `;
+  }
+
+  html += `
+      <button class="btn-suivant" id="btn-suivant" onclick="etapeSuivante()">
+        Continuer <span class="btn-suivant-arrow">→</span>
+      </button>
+    </div>
+  `;
+
+  container.innerHTML = html;
+
+  // Restaurer réponse précédente si elle existe
+  if (reponses[q.id] !== undefined && q.type === 'choix') {
+    const btns = container.querySelectorAll('.option-btn');
+    if (btns[reponses[q.id].index]) {
+      btns[reponses[q.id].index].classList.add('selected');
+      document.getElementById('btn-suivant').classList.add('actif');
+    }
+  } else if (reponses[q.id] !== undefined && q.type === 'libre') {
+    document.getElementById('champ-libre-actif').value = reponses[q.id];
+    document.getElementById('btn-suivant').classList.add('actif');
+  }
+}
+
+function selectionnerOption(index, btn) {
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const q = QUESTIONS[etapeCourante];
+  reponses[q.id] = { valeur: btn.textContent.trim(), index };
+  document.getElementById('btn-suivant').classList.add('actif');
+}
+
+function verifierChampLibre(textarea) {
+  const btn = document.getElementById('btn-suivant');
+  if (textarea.value.trim().length > 0) {
+    btn.classList.add('actif');
+  } else {
+    btn.classList.remove('actif');
+  }
+}
+
+function etapeSuivante() {
+  const q = QUESTIONS[etapeCourante];
+
+  // Enregistrer la réponse du champ libre
+  if (q.type === 'libre') {
+    const champ = document.getElementById('champ-libre-actif');
+    reponses[q.id] = champ.value.trim();
+  }
+
+  // Ajouter au fil de dialogue
+  ajouterHistorique(q);
+
+  etapeCourante++;
+  renderQuestion(etapeCourante);
+}
+
+function ajouterHistorique(q) {
+  const historique = document.getElementById('historique');
+  const valeur = q.type === 'choix'
+    ? reponses[q.id].valeur
+    : reponses[q.id];
+
+  const item = document.createElement('div');
+  item.className = 'reponse-item';
+  item.innerHTML = `
+    <div class="reponse-question">${q.texte.replace(/<em>|<\/em>/g, '').replace(/\n/g, ' ').trim()}</div>
+    <div class="reponse-valeur"><em>${valeur}</em></div>
+  `;
+  historique.appendChild(item);
+
+  // Animation d'apparition
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      item.classList.add('visible');
+    });
+  });
+}
+
+function reserverSeance() {
+  const prenom = document.getElementById('champ-prenom').value.trim();
+  const email = document.getElementById('champ-email').value.trim();
+
+  if (!prenom || !email) {
+    document.getElementById('champ-prenom').focus();
+    return;
+  }
+
+  // Construire les données du questionnaire
+  const params = new URLSearchParams({
+    prenom,
+    email,
+    situation: reponses.situation?.valeur || '',
+    manifestation: reponses.manifestation?.valeur || '',
+    duree: reponses.duree?.valeur || '',
+    cout: reponses.cout || ''
+  });
+
+  // Rediriger vers Cal.com avec les paramètres
+  window.location.href = `https://cal.com/VOTRE-LIEN-DIAGNOSTIC?${params.toString()}`;
+}
+
+// Initialisation
+renderQuestion(0);
+
+// Nav hamburger
+const hamburger = document.getElementById('nav-hamburger');
+const mobileMenu = document.getElementById('nav-menu-mobile');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+</script>
+</body>
+</html>
