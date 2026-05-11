@@ -393,7 +393,7 @@ footer { background: var(--encre); border-top: 0.5px solid var(--rule-dark); pad
   <div class="gate-inner">
     <div class="gate-eyebrow">Accès au modèle complet</div>
     <h2>Votre adresse.<br><em>La suite vous attend.</em></h2>
-    <form class="gate-form" onsubmit="return false;">
+    <form class="gate-form" onsubmit="soumettreEmail(event)">
       <input type="email" class="gate-input" placeholder="votre@adresse.com">
       <button type="submit" class="gate-submit">Accéder →</button>
     </form>
@@ -452,8 +452,45 @@ function fermerPopupOverlay(e) {
 }
 function soumettreEmail(e) {
   e.preventDefault();
-  const email = document.getElementById('popup-email').value;
-  if (email) window.location.href = '/velocite?ref=' + encodeURIComponent(email);
+  const form = e.target;
+  const emailInput = form.querySelector('input[type=email]');
+  const email = emailInput.value.trim();
+  if (!email) return;
+
+  const submitBtn = form.querySelector('button[type=submit]');
+  const originalBtnText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Envoi...';
+
+  fetch('/api/send-link', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      // Transformer le formulaire en message de confirmation
+      const parent = form.parentElement;
+      const note = parent.querySelector('.popup-note, .gate-note');
+      form.style.display = 'none';
+      if (note) note.style.display = 'none';
+      const confirmMsg = document.createElement('div');
+      confirmMsg.style.cssText = 'padding:24px 0;text-align:center;';
+      confirmMsg.innerHTML = '<p style="font-size:17px;color:var(--encre);margin-bottom:12px;"><strong>Vérifiez votre boîte courriel.</strong></p><p style="font-size:14px;color:var(--encre);opacity:0.7;">Un lien d\'accès vient d\'être envoyé à<br><em>' + email + '</em></p>';
+      parent.appendChild(confirmMsg);
+    } else {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+      alert(data.error || 'Une erreur est survenue. Réessayez.');
+    }
+  })
+  .catch(err => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalBtnText;
+    alert('Erreur réseau. Réessayez.');
+    console.error(err);
+  });
 }
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fermerPopup(); });
 
