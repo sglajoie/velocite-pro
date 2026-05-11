@@ -477,8 +477,8 @@ function soumettreEmail(e) {
       if (note) note.style.display = 'none';
       const confirmMsg = document.createElement('div');
       confirmMsg.style.cssText = 'padding:24px 0;text-align:center;';
-      confirmMsg.innerHTML = '<p style="font-size:17px;color:var(--encre);margin-bottom:12px;"><strong>Vérifiez votre boîte courriel.</strong></p><p style="font-size:14px;color:var(--encre);opacity:0.7;">Un lien d\'accès vient d\'être envoyé à<br><em>' + email + '</em></p>';
-      parent.appendChild(confirmMsg);
+      confirmMsg.innerHTML = '<p style="font-size:17px;color:var(--encre);margin-bottom:12px;font-weight:500;">Vérifiez votre boîte courriel.</p><p style="font-size:14px;color:var(--encre);opacity:0.7;">Un lien d\'accès vient d\'être envoyé à<br><em>' + email + '</em></p>';
+      form.insertAdjacentElement('afterend', confirmMsg);
     } else {
       submitBtn.disabled = false;
       submitBtn.textContent = originalBtnText;
