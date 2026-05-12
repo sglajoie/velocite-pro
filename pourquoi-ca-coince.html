@@ -502,7 +502,11 @@ function checkOpenPopupHash() {
     ouvrirPopup();
   }
 }
-checkOpenPopupHash();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', checkOpenPopupHash);
+} else {
+  checkOpenPopupHash();
+}
 window.addEventListener('hashchange', checkOpenPopupHash);
 
 </script>
