@@ -260,11 +260,11 @@ footer { background: var(--encre); border-top: 0.5px solid var(--rule-dark); pad
         <div class="section-paiement" id="section-paiement">
           <div>
             <div class="champ-label">Votre prénom</div>
-            <input type="text" class="champ-input" id="champ-prenom" placeholder="Prénom">
+            <input type="text" class="champ-input" id="champ-prenom" placeholder="Prénom" autocomplete="given-name">
           </div>
           <div>
             <div class="champ-label">Votre adresse email</div>
-            <input type="email" class="champ-input" id="champ-email" placeholder="votre@adresse.com">
+            <input type="email" class="champ-input" id="champ-email" placeholder="votre@adresse.com" autocomplete="email">
           </div>
           <button class="btn-reserver" onclick="reserverSeance()">
             Commencer · 127 € →

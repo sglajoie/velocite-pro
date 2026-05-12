@@ -395,7 +395,7 @@ footer { background: var(--encre); border-top: 0.5px solid var(--rule-dark); pad
     <div class="gate-eyebrow">Accès au modèle complet</div>
     <h2>Votre adresse.<br><em>La suite vous attend.</em></h2>
     <form class="gate-form" onsubmit="soumettreEmail(event)">
-      <input type="email" class="gate-input" placeholder="votre@adresse.com">
+      <input type="email" class="gate-input" placeholder="votre@adresse.com" autocomplete="email">
       <button type="submit" class="gate-submit">Accéder →</button>
     </form>
     <p class="gate-note">Aucun engagement · Aucune carte requise · Accès immédiat</p>
@@ -520,7 +520,7 @@ window.addEventListener('hashchange', checkOpenPopupHash);
     <h2 class="popup-title">Vous avez vu ce qui coince.<br><em>Voici comment ça change.</em></h2>
     <p class="popup-body">Le modèle complet — les trois temps, ce qui change dans vos relations, la grandeur de Vélocité, l'offre et le pricing — est de l'autre côté. Votre adresse suffit.</p>
     <form class="popup-form" onsubmit="soumettreEmail(event)">
-      <input type="email" class="popup-input" id="popup-email" placeholder="votre@adresse.com" required>
+      <input type="email" class="popup-input" id="popup-email" placeholder="votre@adresse.com" autocomplete="email" required>
       <button type="submit" class="popup-submit">Accéder →</button>
     </form>
     <p class="popup-note">Aucun engagement · Aucune carte requise · Accès immédiat</p>
